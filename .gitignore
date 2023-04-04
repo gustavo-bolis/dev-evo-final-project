@@ -3,3 +3,4 @@
 /vendor/
 /.idea/
 /.env
+/app/back-end/parametros_db.php
