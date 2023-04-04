@@ -1,0 +1,5 @@
+/docker-compose.yml
+/docker/mariadb/data/
+/vendor/
+/.idea/
+/.env
