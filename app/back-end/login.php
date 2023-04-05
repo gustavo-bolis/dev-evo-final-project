@@ -1,11 +1,3 @@
-<?php
-//
-//use AppSession\AppSession;
-//
-//include '../classes/AppSession/AppSession.php';
-//AppSession::ValidaAppSessionLogin();
-//?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,7 +34,7 @@
 <script src="lib/requestAnimFrame.js"></script>
 <script src="script.js"></script>
 </canvas>
-<form class="form-signin" method="POST" action="app/login/login.php">
+<form class="form-signin" method="POST" action="modelsUser/validateLogin.php">
     <img class="mb-4" src="dogecoin_logo.png">
     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
 
@@ -51,31 +43,6 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" name="senha" class="form-control" placeholder="Senha" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-
-    <!--</vg-modal>-->
-<!--    --><?php
-//    // Errro ao Logar
-//    if($_GET['erro_login'] == true){
-//        echo '<div class="alert alert-danger" role="alert">
-//                Credenciais invalidas, tente novamente!
-//                </div>';
-//
-//    }
-//
-//    //Permissao de Acesso
-//    if($_GET['permissao'] == "false"){
-//        echo '<div class="alert alert-danger" role="alert">
-//                        Ops! Você não tem permissão para Logar!
-//                  </div>';
-//    }
-//
-//    //Fazendo Logout
-//    if($_GET['logout'] == true){
-//        echo '<div class="alert alert-warning" role="alert">
-//                            Logout realizado Com Sucesso!
-//                     </div>';
-//    }
-//    ?>
 
     <p class="mt-5 mb-3 text-muted">&copy; Dev-Evolution 2023</p>
 </form>
