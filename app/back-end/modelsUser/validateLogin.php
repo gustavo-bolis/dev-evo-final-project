@@ -1,5 +1,6 @@
 <?php
-
+$user = $_POST['email'];
+$password = $_POST['senha'];
 require_once('../DB/mysqlConnection.php');
 
 class Login {
@@ -18,15 +19,23 @@ class Login {
         $result = $stmt->fetch();
 
         if ($result) {
-            echo "deu boa";
             // Login e senha corretos
             return true;
         } else {
-            echo "deu ruim";
             // Login e/ou senha incorretos
             return false;
         }
     }
 
 }
+
+$login = new Login();
+if ($login->validarLogin($user, $password)) {
+    header("Location: ../../index.php");
+    exit;
+} else {
+    header("Location: ../login.php?erro=1");
+    exit;
+}
+
 ?>
