@@ -12,7 +12,7 @@ class Login {
     }
 
     public function validarLogin($user, $password) {
-        $stmt = $this->pdo->prepare("SELECT * FROM tabela_nome WHERE user = :user AND password = :password");
+        $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE user = :user AND password = :password");
         $stmt->bindValue(':user', $user);
         $stmt->bindValue(':password', $password);
         $stmt->execute();

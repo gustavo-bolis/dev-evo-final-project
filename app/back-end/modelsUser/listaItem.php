@@ -12,14 +12,12 @@ class ItemList {
         $stmt->execute();
 
         // Listar todos os itens
-        $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $items;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }
 
 // Exemplo de uso
-$itemList = new ItemList();
+$itemList = new ItemList($conexao);
 $items = $itemList->fetchItems();
 
 foreach ($items as $item) {
