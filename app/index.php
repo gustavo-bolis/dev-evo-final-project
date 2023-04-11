@@ -110,7 +110,7 @@ body {
         window.location.href = "back-end/login/logout.php";
     });
     document.getElementById("list-btn").addEventListener("click", function () {
-        window.location.href = "listaItems.php";
+        window.location.href = "back-end/modelsUser/listaItems.php";
     });
 
     document.getElementById("add-btn").addEventListener("click", function () {
