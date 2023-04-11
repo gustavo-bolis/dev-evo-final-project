@@ -68,8 +68,8 @@ $allGpus = $gpuObj->selectAllGpus();
         $totalW += $gpu['tdp'];
         $totalH += $gpu['rendimento'];
     }
-    echo "Total Watts: " . $totalW . PHP_EOL;
-    echo "Total Hashs/s: " . $totalH . PHP_EOL;
+    echo "<td>"."Total Watts: " . $totalW ."</td>". PHP_EOL;
+    echo "<td>"."Total Hashs/s: " . $totalH ."</td>". PHP_EOL;
     ?>
     </tbody>
 </table>

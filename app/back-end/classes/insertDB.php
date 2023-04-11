@@ -7,7 +7,7 @@ class gpu {
     public function __construct() {
         $this->pdo = Conexao::conectar();
     }
-//Metodo para inserir a GPU
+    //Metodo para inserir a GPU
     public function insertGpu($nome, $fabricante, $tdp, $rendimento, $mem_size) {
         $sql = "INSERT INTO gpu (nome, fabricante, tdp, rendimento, mem_size) VALUES (:nome, :fabricante, :tdp, :rendimento, :memsize)";
         $stmt = $this->pdo->prepare($sql);
