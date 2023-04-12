@@ -35,7 +35,7 @@ if ($id) {
     <h1><?php echo $id ? 'Editar' : 'Adicionar'; ?> GPU</h1>
     <input type="hidden" name="id" value="<?php echo $gpuData['id']; ?>">
     <label for="nome">Nome:</label>
-    <input type="text" name="nome" id="nome" value="<?php echo $gpuData['nome']; ?>" required>
+    <input type="text" name="nome" id="nome" value="<?php echo $gpuData['nome']; ?>" required autofocus>
     <div class="form-row">
         <label for="fabricante">Fabricante:</label>
         <select name="fabricante" id="fabricante" required>

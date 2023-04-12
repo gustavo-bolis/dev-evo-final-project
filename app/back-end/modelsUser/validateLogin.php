@@ -27,9 +27,19 @@ class Login {
         }
     }
 
+    public function countLogin() {
+        $stmt = $this->pdo->prepare("SELECT * FROM usuarios");
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+
 }
 
 $login = new Login();
+$userInit = $login->countLogin();
+if ($userInit == 0) {
+    header("Location: ../login/initUser.php");
+}
 $result = $login->validarLogin($user, $password);
 if ($result) {
     $_SESSION['user_id'] = $result['id'];

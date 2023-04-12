@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result) {
         header('Location: listaItems.php?' . ($newGpu ? "updated=" . $id : "added=" . $newId));
-        exit(); // é importante sair imediatamente após a chamada do header()
+        exit();
     } else {
         echo "Erro ao " . ($id ? "atualizar" : "inserir") . " registro.";
     }
