@@ -39,17 +39,18 @@ $login = new Login();
 $userInit = $login->countLogin();
 if ($userInit == 0) {
     header("Location: ../login/initUser.php");
-}
-$result = $login->validarLogin($user, $password);
-if ($result) {
-    $_SESSION['user_id'] = $result['id'];
-    $_SESSION['username'] = $result['user'];
-    $_SESSION['logado'] = true;
-    header("Location: ../../index.php");
-    exit;
-} else {
-    header("Location: ../../login.php?erro=1");
-    exit;
+}else {
+    $result = $login->validarLogin($user, $password);
+    if ($result) {
+        $_SESSION['user_id'] = $result['id'];
+        $_SESSION['username'] = $result['user'];
+        $_SESSION['logado'] = true;
+        header("Location: ../../index.php");
+        exit;
+    } else {
+        header("Location: ../../login.php?erro=1");
+        exit;
+    }
 }
 
 ?>
