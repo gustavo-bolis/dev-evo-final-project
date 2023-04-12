@@ -19,10 +19,8 @@ class Login {
         $result = $stmt->fetch();
 
         if ($result) {
-            // Login e senha corretos
             return true;
         } else {
-            // Login e/ou senha incorretos
             return false;
         }
     }

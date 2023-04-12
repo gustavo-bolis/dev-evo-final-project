@@ -10,80 +10,9 @@ $allGpus = $gpuObj->selectAllGpus();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lista.css">
     <title>GPUs</title>
     <div id="aviso" class="aviso oculto"></div>
-    <style>
-        body {
-            background-color: #212121;
-            color: #f5f5f5;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #4f4f4f;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        .aviso {
-            position: fixed;
-            top: 90%;
-            left: 85%;
-            width: 10%;
-            padding: 10px;
-            background-color: #17fd00;
-            color: black;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 10px;
-            animation: subir-descer 2s ease-in-out;
-        }
-
-        .aviso-delete {
-            background-color: #FFCC00;
-        }
-
-        .oculto {
-            display: none;
-        }
-
-        .id-column {
-            width: 50px; /* ajuste o valor conforme necessário */
-        }
-
-        .nvidia {
-            background-color: rgba(23, 253, 0, 0.2); /* Verde */
-        }
-
-        .amd {
-            background-color: rgba(255, 0, 0, 0.2); /* Vermelho */
-        }
-
-        .intel {
-            background-color: rgba(0, 48, 250, 0.2); /* Azul */
-        }
-
-        @keyframes subir-descer {
-            0% {
-                transform: translateY(-100%);
-            }
-            50% {
-                transform: translateY(10%);
-            }
-            100% {
-                transform: translateY(0%);
-            }
-        }
-
-    </style>
 </head>
 <body>
 <h1>Lista de GPUs</h1>
@@ -133,6 +62,22 @@ $allGpus = $gpuObj->selectAllGpus();
     </tbody>
 </table>
 <button onclick="location.href='add_Edit.php'">Adicionar GPU</button>
+<button id="duplicar-btn">Duplicar GPU</button>
+<div id="duplicar-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Duplicar GPU</h2>
+        <form id="duplicar-form">
+            <label for="gpu-id">Selecione o ID da GPU para duplicar:</label>
+            <select name="gpu-id" id="gpu-id">
+                <?php foreach ($allGpus as $gpu) : ?>
+                    <option value="<?php echo $gpu['id']; ?>"><?php echo $gpu['id']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit">Duplicar GPU</button>
+        </form>
+    </div>
+</div>
 <script>
     function confirmDeletion(id) {
         const confirmation = confirm('Deseja realmente deletar o registro ID: ' + id + '?');
@@ -140,31 +85,54 @@ $allGpus = $gpuObj->selectAllGpus();
             window.location.href = "delete.php?id=" + id;
         }
     }
-    // Seleciona o elemento de aviso
     const avisoEl = document.querySelector('#aviso');
 
-    // Função para exibir uma mensagem de aviso
     function exibirAviso(mensagem, tipo) {
-        // Define o texto do aviso
         avisoEl.textContent = mensagem;
-
         if (tipo === 'delete') {
             avisoEl.classList.add('aviso-delete');
         } else {
             avisoEl.classList.remove('aviso-delete');
         }
-
-        // Remove a classe 'oculto' para exibir o aviso
+        if (tipo === 'duplicado') {
+            avisoEl.classList.add('aviso-duplicado');
+        } else {
+            avisoEl.classList.remove('aviso-duplicado');
+        }
         avisoEl.classList.remove('oculto');
-
-        // Define um tempo de espera para remover o aviso
         setTimeout(() => {
-            // Adiciona a classe 'oculto' para ocultar o aviso novamente
             avisoEl.classList.add('oculto');
-            // Remove o texto do aviso
             avisoEl.textContent = '';
         }, 5000); // Tempo em milissegundos (5 segundos)
     }
+
+    const duplicarBtn = document.getElementById("duplicar-btn");
+    const duplicarModal = document.getElementById("duplicar-modal");
+    const duplicarForm = document.getElementById("duplicar-form");
+    const closeModal = document.querySelector(".close");
+
+    duplicarBtn.onclick = function () {
+        duplicarModal.style.display = "block";
+    };
+
+    closeModal.onclick = function () {
+        duplicarModal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == duplicarModal) {
+            duplicarModal.style.display = "none";
+        }
+    };
+    duplicarForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const gpuId = document.getElementById("gpu-id").value;
+        if (gpuId) {
+            window.location.href = `duplicateGpu.php?id=${gpuId}`;
+        } else {
+            alert("Selecione um ID de GPU válido.");
+        }
+    });
 </script>
 </body>
 </html>
@@ -178,5 +146,9 @@ if (isset($_GET['deleted'])) {
 }elseif (isset($_GET['added'])){
     $id = $_GET['added'];
     echo "<script>exibirAviso('Registro $id adicionado com sucesso.');</script>";
+}elseif (isset($_GET['duplicated'])){
+    $id = $_GET['duplicated'];
+    $idNew = $_GET['new'];
+    echo "<script>exibirAviso('Duplicado $id novo registro ID: $idNew', 'duplicado');</script>";
 }
 ?>
