@@ -106,3 +106,18 @@ th, td {
         transform: translateY(0%);
     }
 }
+
+button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+button:hover {
+    background-color: #555;
+}
