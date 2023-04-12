@@ -1,4 +1,7 @@
 <?php
+require_once '../login/sessao.php';
+validaSessao();
+
 require_once '../classes/insertDB.php';
 
 $gpuObj = new gpu();
@@ -25,6 +28,7 @@ $allGpus = $gpuObj->selectAllGpus();
         <th>TDP</th>
         <th>Hashs/s</th>
         <th>Memória</th>
+        <th>Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -37,11 +41,13 @@ $allGpus = $gpuObj->selectAllGpus();
             <td><?php echo $gpu['rendimento']." MH/s"; ?></td>
             <td><?php echo $gpu['memsize']." Mb"; ?></td>
             <td>
-                <button onclick="location.href='add_Edit.php?id=<?php echo $gpu['id']; ?>'">Editar</button>
-                <form method="post" action="delete.php" id="delete-form-<?php echo $gpu['id']; ?>">
-                    <input type="hidden" name="id" value="<?php echo $gpu['id']; ?>">
-                    <button type="button" onclick="confirmDeletion(<?php echo $gpu['id']; ?>)">Deletar</button>
-                </form>
+                <div class="button-container">
+                    <button onclick="location.href='add_Edit.php?id=<?php echo $gpu['id']; ?>'">Editar</button>
+                    <form method="post" action="delete.php" id="delete-form-<?php echo $gpu['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo $gpu['id']; ?>">
+                        <button type="button" onclick="confirmDeletion(<?php echo $gpu['id']; ?>)">Deletar</button>
+                    </form>
+                </div>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -53,16 +59,20 @@ $allGpus = $gpuObj->selectAllGpus();
         $totalH += $gpu['rendimento'];
     }
     echo "<tr>";
+    echo "<td colspan='7'></td>";
+    echo "</tr>";
+    echo "<tr>";
     echo "<td colspan='3'></td>";
     echo "<td>"."Total Watts: " . $totalW ."</td>". PHP_EOL;
-    echo "<td class='hash-column'>"."Total Hashs/s: " . $totalH ."</td>". PHP_EOL;
-    echo "<td></td>";
+    echo "<td class='hash-column'>"."Total Hashs/s: " . $totalH ."</td>";
+//    echo "<td colspan='2'></td>";
     echo "</tr>";
     ?>
     </tbody>
 </table>
 <button onclick="location.href='add_Edit.php'">Adicionar GPU</button>
 <button id="duplicar-btn">Duplicar GPU</button>
+<button onclick="location.href='../../index.php'">Voltar</button>
 <div id="duplicar-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -149,6 +159,6 @@ if (isset($_GET['deleted'])) {
 }elseif (isset($_GET['duplicated'])){
     $id = $_GET['duplicated'];
     $idNew = $_GET['new'];
-    echo "<script>exibirAviso('Duplicado $id novo registro ID: $idNew', 'duplicado');</script>";
+    echo "<script>exibirAviso('Duplicado ID $id novo registro ID: $idNew', 'duplicado');</script>";
 }
 ?>

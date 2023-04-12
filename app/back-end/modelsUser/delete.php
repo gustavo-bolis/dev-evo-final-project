@@ -1,4 +1,6 @@
 <?php
+require_once '../login/sessao.php';
+validaSessao();
 
 require_once '../classes/insertDB.php';
 

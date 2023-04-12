@@ -34,7 +34,7 @@
 <script src="lib/requestAnimFrame.js"></script>
 <script src="script.js"></script>
 </canvas>
-<form class="form-signin" method="POST" action="modelsUser/validateLogin.php">
+<form class="form-signin" method="POST" action="back-end/modelsUser/validateLogin.php">
     <img class="mb-4" src="dogecoin_logo.png">
     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
 

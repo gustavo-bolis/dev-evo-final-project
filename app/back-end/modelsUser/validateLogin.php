@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $user = $_POST['email'];
 $password = $_POST['senha'];
 require_once('../DB/mysqlConnection.php');
@@ -16,10 +18,10 @@ class Login {
         $stmt->bindValue(':user', $user);
         $stmt->bindValue(':password', $password);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            return true;
+            return $result;
         } else {
             return false;
         }
@@ -28,11 +30,15 @@ class Login {
 }
 
 $login = new Login();
-if ($login->validarLogin($user, $password)) {
+$result = $login->validarLogin($user, $password);
+if ($result) {
+    $_SESSION['user_id'] = $result['id'];
+    $_SESSION['username'] = $result['user'];
+    $_SESSION['logado'] = true;
     header("Location: ../../index.php");
     exit;
 } else {
-    header("Location: ../login.php?erro=1");
+    header("Location: ../../login.php?erro=1");
     exit;
 }
 

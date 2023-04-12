@@ -1,3 +1,8 @@
+<?php
+require_once 'back-end/login/sessao.php';
+
+validaSessao();
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
