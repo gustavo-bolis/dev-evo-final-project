@@ -8,19 +8,19 @@ class gpu {
         $this->pdo = Conexao::conectar();
     }
     //Metodo para inserir a GPU
-    public function insertGpu($nome, $fabricante, $tdp, $rendimento, $mem_size) {
-        $sql = "INSERT INTO gpu (nome, fabricante, tdp, rendimento, mem_size) VALUES (:nome, :fabricante, :tdp, :rendimento, :memsize)";
+    public function insertGpu($nome, $fabricante, $tdp, $rendimento, $memsize) {
+        $sql = "INSERT INTO gpu (nome, fabricante, tdp, rendimento, memsize) VALUES (:nome, :fabricante, :tdp, :rendimento, :memsize)";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindParam(':fabricante', $fabricante, PDO::PARAM_STR);
         $stmt->bindParam(':tdp', $tdp, PDO::PARAM_INT);
         $stmt->bindParam(':rendimento', $rendimento, PDO::PARAM_STR);
-        $stmt->bindParam(':memsize', $mem_size, PDO::PARAM_INT);
+        $stmt->bindParam(':memsize', $memsize, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
-            return $pdo->lastInsertId();
+            return $stmt;
         } catch (PDOException $e) {
             die("Insert Failed: " . $e->getMessage());
         }
@@ -55,8 +55,8 @@ class gpu {
     }
 
     // Método para atualizar GPU por ID
-    public function updateGpu($id, $nome, $fabricante, $tdp, $rendimento, $mem_size) {
-        $sql = "UPDATE gpu SET nome = :nome, fabricante = :fabricante, tdp = :tdp, rendimento = :rendimento, mem_size = :mem_size WHERE id = :id";
+    public function updateGpu($id, $nome, $fabricante, $tdp, $rendimento, $memsize) {
+        $sql = "UPDATE gpu SET nome = :nome, fabricante = :fabricante, tdp = :tdp, rendimento = :rendimento, memsize = :memsize WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -64,7 +64,7 @@ class gpu {
         $stmt->bindParam(':fabricante', $fabricante, PDO::PARAM_STR);
         $stmt->bindParam(':tdp', $tdp, PDO::PARAM_INT);
         $stmt->bindParam(':rendimento', $rendimento, PDO::PARAM_STR);
-        $stmt->bindParam(':memsize', $mem_size, PDO::PARAM_INT);
+        $stmt->bindParam(':memsize', $memsize, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
@@ -87,5 +87,9 @@ class gpu {
         } catch (PDOException $e) {
             die("Delete Failed: " . $e->getMessage());
         }
+    }
+
+    public function getPDO() {
+        return $this->pdo;
     }
 }

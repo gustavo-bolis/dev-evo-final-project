@@ -49,7 +49,7 @@ $allGpus = $gpuObj->selectAllGpus();
             <td><?php echo $gpu['rendimento']; ?></td>
             <td><?php echo $gpu['mem_size']; ?></td>
             <td>
-                <button onclick="location.href='edit.php?id=<?php echo $gpu['id']; ?>'">Editar</button>
+                <button onclick="location.href='/back-end/modelsUser/add_Edit.php?id=<?php echo $gpu['id']; ?>'">Editando</button>
                 <button onclick="location.href='delete.php?id=<?php echo $gpu['id']; ?>'">Deletar</button>
             </td>
         </tr>
