@@ -30,10 +30,10 @@ validaSessao();
 
   <script>
     document.getElementById("users-btn").addEventListener("click", function () {
-      window.location.href = "listaUsuarios.php";
+      window.location.href = "back-end/modelsUser/listaUsers.php";
     });
     document.getElementById("config-btn").addEventListener("click", function () {
-      window.location.href = "configuracoes.php";
+      window.location.href = "back-end/modelsUser/configuracoes.php";
           });
     // app/back-end/login/logout.php
     // app/index.php

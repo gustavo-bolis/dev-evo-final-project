@@ -9,7 +9,7 @@ class validaUserInit {
         $this->pdo = Conexao::conectar();
     }
 
-    public function insereUser($name, $user, $password) {
+    public function insertUser($name, $user, $password) {
         $stmt = $this->pdo->prepare("INSERT INTO usuarios (name, user, password) VALUES (:name, :user, :password)");
         $stmt->bindValue(':name', $name);
         $stmt->bindValue(':user', $user);
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $_POST['user'];
     $password = $_POST['password'];
 
-    if ($login->insereUser($name, $user, $password)) {
+    if ($login->insertUser($name, $user, $password)) {
         header("Location: ../../login.php");
         exit();
     } else {
