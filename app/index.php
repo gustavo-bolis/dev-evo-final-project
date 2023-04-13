@@ -14,7 +14,7 @@ validaSessao();
 <body>
   <div class="container">
     <button id="list-btn">Listar GPUs</button>
-    <button id="add-btn">Adicionar</button>
+    <button id="add-btn">Dashboard</button>
       <span id="settings-icon">&#x2022;&#x2022;&#x2022;</span>
   </div>
 
@@ -34,9 +34,7 @@ validaSessao();
     });
     document.getElementById("config-btn").addEventListener("click", function () {
       window.location.href = "back-end/modelsUser/configuracoes.php";
-          });
-    // app/back-end/login/logout.php
-    // app/index.php
+    });
     document.getElementById("logout-btn").addEventListener("click", function () {
         window.location.href = "back-end/login/logout.php";
     });
@@ -45,7 +43,7 @@ validaSessao();
     });
 
     document.getElementById("add-btn").addEventListener("click", function () {
-        window.location.href = "adicionaItem.php";
+        window.location.href = "back-end/modelsUser/dashboard.php";
     });
 
     var modal = document.getElementById("settings-modal");
