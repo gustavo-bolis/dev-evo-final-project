@@ -14,6 +14,7 @@ var i;
 var animate = false;
 
 initializeStars();
+animate = true;
 
 function executeFrame(){
     if(animate)
@@ -81,16 +82,17 @@ canvas.addEventListener("mousemove",function(e){
 });
 
 // Kick off the animation when the mouse enters the canvas
-canvas.addEventListener('mouseover', function(e){
-    animate = true;
-    executeFrame();
-});
+// canvas.addEventListener('mouseover', function(e){
+//     animate = true;
+//     executeFrame();
+// });
 
 // Pause animation when the mouse exits the canvas
 canvas.addEventListener("mouseout",function(e){
     mouseDown = false;
-    animate = false;
+    animate = true;
 });
 
 // Draw the first frame to start animation
+animate = true;
 executeFrame();
